@@ -2,11 +2,10 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import Paper from '@material-ui/core/Paper';
-import AppBar from '@material-ui/core/AppBar';
-import LocationList from './components/LocationList';
+import Paper from 'material-ui/Paper';
+import AppBar from 'material-ui/AppBar';
 import ForecastExtended from './components/ForecastExtended';
-// import {createStore} from 'redux'
+import LocationListContainer from './containers/LocationListContainer'
 import './App.css';
 
 const cities = [
@@ -17,22 +16,12 @@ const cities = [
   'Madrid,es'
 ];
 
-// const store= createStore(()=>{})
-
 class App extends Component {
 
   constructor() {
     super();
     this.state = { city: null };
   }
-
-  handleSelectedLocation = city => {
-    this.setState({ city });
-    console.log(`handleSelectedLocation ${city}`);
-    // const action={type: 'setCity',value:city}
-    // store.dispatch(action)
-  }
-  
   render() {
     const { city } = this.state;
     return (
@@ -46,8 +35,7 @@ class App extends Component {
           </Row>
           <Row>
             <Col xs={12} md={6}>
-              <LocationList cities={cities} 
-              onSelectedLocation={this.handleSelectedLocation} ></LocationList>
+              <LocationListContainer cities={cities}></LocationListContainer>
             </Col>
             <Col xs={12} md={6}>
               <Paper zDepth={4}>
