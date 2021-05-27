@@ -7,7 +7,7 @@ import ForecastExtended from '../components/ForecastExtended'
 class ForecastExtendedContainer extends Component {
     render(){
         return(
-            //this.props.city &&
+            this.props.city &&
             <ForecastExtended city={this.props.city}/>
         )
     }
