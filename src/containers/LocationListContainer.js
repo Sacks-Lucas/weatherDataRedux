@@ -24,7 +24,7 @@ LocationListContainer.propTypes = {
 }
 
 const mapDispatchToProps= dispatch =>({
-    dispatchSetCity: value => dispatch(setCity(value))
+    setCity: value => dispatch(setCity(value))
 })
 
 export default connect(null, mapDispatchToProps)(LocationListContainer)
