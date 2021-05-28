@@ -1,35 +1,56 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import PropTypes from 'prop-types'
 import LocationList from './../components/LocationList';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 // import { setSelectedCity,setWeather } from './../actions';
 import * as actions from './../actions';
-import { Component } from 'react';
+// import { Component } from 'react';
 import {getCity, getWeatherCities} from '../reducers'
 
-class LocationListContainer extends Component {
-    
-    componentDidMount(){
-        const {setWeather,setSelectedCity,cities,city} = this.props
-        setWeather(cities)
-        setSelectedCity(city)
-    }
 
-    handleSelectedLocation = city => {
+const LocationListContainer = props => {
+    useEffect(() => {
+        const {setWeather,setCity,cities,city} = props
+        setWeather(cities)
+        setCity(city)
+        // eslint-disable-next-line 
+    }, [])
+    const handleSelectedLocation = city => {
         this.props.setSelectedCity(city)
+        this.props.setCity(city)
     }
-    render(){
-        return (
-            <LocationList cities={this.props.citiesWeather} 
-                onSelectedLocation={this.handleSelectedLocation} ></LocationList>
-        )
-    }
+    return (
+            <LocationList cities={props.citiesWeather} 
+            onSelectedLocation={handleSelectedLocation} ></LocationList>
+    )
 }
 
+// class LocationListContainer extends Component {
+//     componentDidMount(){
+//         const {setWeather,/*setSelectedCity*/setCity,cities,city} = this.props
+//         console.log("props:", this.props)
+//         setWeather(cities)
+//         // setSelectedCity(city)
+//         setCity(city)
+//     }
+    
+//     handleSelectedLocation = city => {
+//         // this.props.setSelectedCity(city)
+//         this.props.setCity(city)
+//     }
+//     render(){
+//         return (
+//             <LocationList cities={this.props.citiesWeather} 
+//             onSelectedLocation={this.handleSelectedLocation} ></LocationList>
+//         )
+//     }
+// }
+
+
 LocationListContainer.propTypes = {
-    // setCity:PropTypes.func.isRequired,
-    setSelectedCity:PropTypes.func.isRequired,
+    // setSelectedCity:PropTypes.func.isRequired,
+    setCity:PropTypes.func.isRequired,
     setWeather:PropTypes.func.isRequired,
     cities:PropTypes.array.isRequired,
     citiesWeather:PropTypes.array,
@@ -41,7 +62,7 @@ const mapStateToProps = state =>({
     city: getCity(state)
 })
 
-const mapDispatchToProps= dispatch => bindActionCreators(actions, dispatch)
+const mapDispatchToProps= dispatch => bindActionCreators({setCity:actions.setSelectedCity,setWeather: actions.setWeather}, dispatch)
 /*
 const mapDispatchToProps= dispatch =>({
     setCity: value => dispatch(setSelectedCity(value)),

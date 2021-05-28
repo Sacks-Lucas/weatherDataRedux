@@ -23,10 +23,9 @@ const ForecastExtended = ({city,forecastData}) => {
         <h2 className='forecast-title'>Pronóstico Extendido para {city}</h2>
         {forecastData ? 
             renderForecastItemDays(forecastData) :
-            renderProgress()}
+            renderProgress()} 
     </div>);
 }
-
 
 ForecastExtended.propTypes = {
     city: PropTypes.string.isRequired,
